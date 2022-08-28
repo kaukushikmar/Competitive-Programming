@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Minimum segment tree
 int n, t[800005];
+int q;
+int a[200005];
 
 void build(int a[], int v, int tl, int tr)
 {
@@ -48,14 +49,30 @@ void update(int v, int tl, int tr, int pos, int new_val)
     }
 }
 
-int gcd(int a, int b)
-{
-    return b == 0 ? a : gcd(b, a % b);
-}
-
 int main()
 {
 
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+
+    cin >> n >> q;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+    build(a, 1, 0, n - 1);
+    for (int i = 0; i < q; i++)
+    {
+        int x, y, z;
+        cin >> x >> y >> z;
+        if (x == 2)
+        {
+            cout << sum(1, 0, n - 1, y - 1, z - 1) << endl;
+        }
+        else
+        {
+            update(1, 0, n - 1, y - 1, z);
+        }
+    }
 }
